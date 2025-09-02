@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Date Sorter - Dosya Sıralama Programı
+Date Sorter v1.0 - File Date Management Tool
 Ana uygulama dosyası
+
+Author: Semi Eren Gökyıldız
+Email: gokyildizsemieren@gmail.com
+GitHub: https://github.com/SERENGOKYILDIZ
+LinkedIn: https://www.linkedin.com/in/semi-eren-gokyildiz/
 """
+
+__version__ = "1.0.0"
+__author__ = "Semi Eren Gökyıldız"
+__email__ = "gokyildizsemieren@gmail.com"
 
 from tkinter import messagebox
 from ui import DateSorterUI

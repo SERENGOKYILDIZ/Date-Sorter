@@ -1,9 +1,26 @@
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import os
+import sys
 from datetime import datetime, timedelta
 import threading
 from sorter import FileSorter
+
+# Versiyon bilgisini main.py'den import et
+try:
+    from main import __version__
+except ImportError:
+    __version__ = "1.0.0"
+
+def get_resource_path(relative_path):
+    """PyInstaller ile paketlenmiş uygulamada kaynak dosyaların yolunu al"""
+    try:
+        # PyInstaller ile oluşturulmuş exe içinde
+        base_path = sys._MEIPASS
+    except Exception:
+        # Normal Python çalıştırmasında
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 class DateSorterUI:
     def __init__(self):
@@ -14,28 +31,95 @@ class DateSorterUI:
         self.sort_reverse = False
         self.setup_ui()
         
+    def setup_menu(self):
+        """Menü bar oluştur"""
+        menubar = tk.Menu(self.root)
+        self.root.config(menu=menubar)
+        
+        # Help menüsü
+        help_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Help", menu=help_menu)
+        help_menu.add_command(label="About", command=self.show_about)
+        
+    def show_about(self):
+        """About dialog göster"""
+        about_text = f"""Date Sorter v{__version__}
+
+File Date Management Tool
+
+Author: Semi Eren Gökyıldız
+Email: gokyildizsemieren@gmail.com
+GitHub: https://github.com/SERENGOKYILDIZ
+LinkedIn: https://www.linkedin.com/in/semi-eren-gokyildiz/
+
+A modern and user-friendly file sorting application.
+Reorganizes file modification dates starting from 1980,
+incrementing by one day for each file.
+
+© 2024 Semi Eren Gökyıldız"""
+        
+        messagebox.showinfo("About Date Sorter", about_text)
+        
     def setup_ui(self):
         """Ana UI'yi oluştur"""
-        self.root.title("Date Sorter")
+        self.root.title(f"Date Sorter v{__version__}")
         self.root.geometry("1200x800")
         self.root.configure(bg="#2b2b2b")
         
+        # Window ikonu
+        try:
+            icon_path = get_resource_path("logo/favicon.ico")
+            self.root.iconbitmap(icon_path)
+        except Exception as e:
+            print(f"İkon yüklenemedi: {e}")
+        
         # Tam ekran başlat
         self.root.state('zoomed')
+        
+        # Menü bar oluştur
+        self.setup_menu()
         
         # Ana container
         main_container = tk.Frame(self.root, bg="#2b2b2b")
         main_container.pack(fill="both", expand=True, padx=20, pady=20)
         
+        # Logo ve başlık container
+        header_frame = tk.Frame(main_container, bg="#2b2b2b")
+        header_frame.pack(pady=(0, 20))
+        
+        # Logo (emoji olarak)
+        logo_label = tk.Label(
+            header_frame,
+            text="📅",
+            font=("Segoe UI", 24),
+            bg="#2b2b2b",
+            fg="white"
+        )
+        logo_label.pack(side="left", padx=(0, 15))
+        
+        # Başlık ve versiyon container
+        title_frame = tk.Frame(header_frame, bg="#2b2b2b")
+        title_frame.pack(side="left")
+        
         # Başlık
         title_label = tk.Label(
-            main_container,
-            text="📅 Date Sorter",
+            title_frame,
+            text="Date Sorter",
             font=("Segoe UI", 24, "bold"),
             bg="#2b2b2b",
             fg="white"
         )
-        title_label.pack(pady=(0, 20))
+        title_label.pack(anchor="w")
+        
+        # Versiyon bilgisi
+        version_label = tk.Label(
+            title_frame,
+            text=f"v{__version__}",
+            font=("Segoe UI", 12),
+            bg="#2b2b2b",
+            fg="#888888"
+        )
+        version_label.pack(anchor="w")
         
         # Kontrol paneli
         self.setup_control_panel(main_container)

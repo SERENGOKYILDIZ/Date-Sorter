@@ -1,6 +1,17 @@
-# 📁 Date Sorter - File Sorting Application
+# 📁 Date Sorter v1.0 - File Sorting Application
 
 A modern and user-friendly file sorting application. Reorganizes file modification dates starting from 1980, incrementing by one day for each file.
+
+## 🎯 Version 1.0 Features
+
+- ✅ **Standalone Executable**: No Python installation required
+- ✅ **Cross-Platform**: Windows, macOS, and Linux support
+- ✅ **Modern GUI**: Dark theme with responsive design
+- ✅ **Custom Logo**: Professional branding with custom icon
+- ✅ **Drag & Drop**: Intuitive file reordering
+- ✅ **Multi-Selection**: Ctrl+click and Shift+click support
+- ✅ **Progress Tracking**: Real-time operation status
+- ✅ **Custom Start Year**: Configurable date assignment
 
 ## ✨ Features
 
@@ -18,21 +29,44 @@ A modern and user-friendly file sorting application. Reorganizes file modificati
 
 ## 🚀 Installation
 
-### Requirements
+### Option 1: Standalone Executable (Recommended)
+1. Download `DateSorter-v1.0.0.exe` (Windows) or `DateSorter-v1.0.0` (Linux/Mac)
+2. Double-click to run - **No Python installation required!**
+
+### Option 2: From Source Code
+#### Requirements
 - Python 3.7 or higher
 - Windows, macOS, or Linux
 
-### Installation Steps
+#### Installation Steps
 1. Clone or download the project
 2. Open Terminal/Command Prompt
 3. Navigate to the project directory:
    ```bash
    cd Date-Sorter
    ```
-4. Run the application:
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Run the application:
    ```bash
    python main.py
    ```
+
+### Building Executable from Source
+1. Install PyInstaller:
+   ```bash
+   pip install pyinstaller
+   ```
+2. Run build script:
+   - **Windows**: Double-click `build.bat`
+   - **Linux/Mac**: Run `./build.sh`
+3. Find executable in `dist/` folder with version in filename:
+   - **Windows**: `DateSorter-v1.0.0.exe`
+   - **Linux/Mac**: `DateSorter-v1.0.0`
+
+**Note**: If you get "pyinstaller not found" error, use `python -m PyInstaller` instead of `pyinstaller` directly.
 
 ## 📖 Usage
 
@@ -57,10 +91,20 @@ A modern and user-friendly file sorting application. Reorganizes file modificati
 
 ```
 Date-Sorter/
-├── main.py          # Main application file
-├── ui.py            # User interface
-├── sorter.py        # File operations and date calculations
-└── README.md        # This file
+├── main.py              # Main application file
+├── ui.py                # User interface
+├── sorter.py            # File operations and date calculations
+├── logo/                # Logo and icon files
+│   ├── logo.png         # Main logo image
+│   ├── favicon.ico      # Original favicon
+│   ├── icon.ico         # Generated executable icon
+│   └── favicon-32x32.png # 32x32 logo
+├── requirements.txt     # Python dependencies
+├── version_info.txt     # Version information for executable
+├── build.bat            # Windows build script
+├── build.sh             # Linux/Mac build script
+├── .gitignore           # Git ignore rules
+└── README.md            # This file
 ```
 
 ## 🔧 Technical Details
@@ -68,6 +112,8 @@ Date-Sorter/
 ### Technologies Used
 - **Python 3.7+**: Main programming language
 - **Tkinter**: GUI framework
+- **PyInstaller**: Executable creation
+- **Pillow**: Image processing for icons
 - **Threading**: For asynchronous operations
 - **OS Module**: File system operations
 - **DateTime**: Date calculations

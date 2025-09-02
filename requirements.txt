@@ -1,0 +1,12 @@
+# Date Sorter v1.0 - Requirements
+# Python dependencies for building executable
+
+# Core GUI framework (built-in with Python)
+# tkinter - included with Python standard library
+
+# For building executable
+pyinstaller>=5.13.0
+Pillow>=10.0.0
+
+# Optional: For better executable optimization
+# upx-ucl - for compression (install separately if needed)
